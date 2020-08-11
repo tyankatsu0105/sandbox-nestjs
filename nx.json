@@ -28,6 +28,9 @@
     "ui-e2e": {
       "tags": [],
       "implicitDependencies": ["ui"]
+    },
+    "mock-server": {
+      "tags": []
     }
   }
 }

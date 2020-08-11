@@ -48,7 +48,8 @@
         "serve": {
           "builder": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "ui:build"
+            "buildTarget": "ui:build",
+            "proxyConfig": "apps/ui/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -101,6 +102,62 @@
             "linter": "eslint",
             "tsConfig": ["apps/ui-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/ui-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "mock-server": {
+      "root": "apps/mock-server",
+      "sourceRoot": "apps/mock-server/src",
+      "projectType": "application",
+      "prefix": "mock-server",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/mock-server",
+            "main": "apps/mock-server/src/main.ts",
+            "tsConfig": "apps/mock-server/tsconfig.app.json",
+            "assets": ["apps/mock-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/mock-server/src/environments/environment.ts",
+                  "with": "apps/mock-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "mock-server:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/mock-server/tsconfig.app.json",
+              "apps/mock-server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/mock-server/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/mock-server/jest.config.js",
+            "tsConfig": "apps/mock-server/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }
