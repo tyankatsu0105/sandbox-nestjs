@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import * as SharedTypes from '~ui/app/shared/types';
+import * as SharedTypes from '../../types';
 
 // ==========================
 // types

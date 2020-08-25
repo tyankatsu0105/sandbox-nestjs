@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 
-import * as Pages from './pages';
+import * as Pages from './views/pages';
 
-import * as SharedComponents from '~ui/app/shared/components';
+import * as SharedComponents from '~ui/app/views/shared/components';
 
 const routeInfo = {
   home: {
