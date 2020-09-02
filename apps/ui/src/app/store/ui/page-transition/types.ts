@@ -1,14 +1,18 @@
 import { featureKey } from './constants';
 
 export const ActionTypes = {
-  FETCH: `${featureKey}/fetch`,
+  TOGGLE_LOADING: `${featureKey}/toggleLoading`,
 };
 
-type Fetch = {
-  type: typeof ActionTypes['FETCH'];
+export type Payload = {
+  toggleLoading: {
+    amount: number;
+  };
 };
 
-export type Action = Fetch;
+type ToggleLoading = {
+  type: typeof ActionTypes['TOGGLE_LOADING'];
+};
 
 export type State = {
   isLoading: boolean;

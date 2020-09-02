@@ -1,3 +1,3 @@
-import * as SharedModules from '~ui/app/views/shared/modules';
+import * as React from 'react';
 
-export const Home = SharedModules.lazyPage(import('./home'));
+export const Home = React.lazy(() => import('./home'));

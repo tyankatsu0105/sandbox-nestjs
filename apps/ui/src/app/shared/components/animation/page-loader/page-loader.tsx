@@ -1,28 +1,32 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
-import * as SharedTypes from '../../types';
+import styled from 'styled-components';
+import { TransitionStatus } from 'react-transition-group/Transition';
+
+import * as SharedTypes from '../../../types/css';
 
 // ==========================
 // types
 // ==========================
-type Props = {
+export type Props = {
   duration?: SharedTypes.CSSProperties['animationDuration'];
   color?: SharedTypes.CSSProperties['color'];
   size?: SharedTypes.CSSProperties['fontSize'];
 };
 
 // ==========================
-// components
+// component
 // ==========================
-export const PageLoader = (props: Props) => (
+export const Component: React.FC<Props> = (props) => (
   <Overlay>
     <Element duration={props.duration} color={props.color} size={props.size} />
   </Overlay>
 );
+
 // ==========================
 // styles
 // ==========================
+
 const Overlay = styled.div`
   position: fixed;
   left: 0;
@@ -33,9 +37,13 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: 0.5s;
 `;
 
-const Element = styled.div<Props>`
+type ElementProps = Pick<Props, 'color' | 'duration' | 'size'>;
+
+const Element = styled.div<ElementProps>`
   color: ${({ color }) => color || 'red'};
   font-size: ${({ size }) => size || '90px'};
   overflow: hidden;
@@ -80,11 +88,9 @@ const Element = styled.div<Props>`
   }
   @keyframes round {
     0% {
-      -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
     100% {
-      -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
