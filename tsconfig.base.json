@@ -19,7 +19,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "~ui/*": ["apps/ui/src/*"]
+      "~client/*": ["apps/client/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

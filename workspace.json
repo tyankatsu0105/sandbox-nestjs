@@ -1,21 +1,21 @@
 {
   "version": 1,
   "projects": {
-    "ui": {
-      "root": "apps/ui",
-      "sourceRoot": "apps/ui/src",
+    "client": {
+      "root": "apps/client",
+      "sourceRoot": "apps/client/src",
       "projectType": "application",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/web:build",
           "options": {
-            "outputPath": "dist/apps/ui",
-            "index": "apps/ui/src/index.html",
-            "main": "apps/ui/src/main.tsx",
-            "polyfills": "apps/ui/src/polyfills.ts",
-            "tsConfig": "apps/ui/tsconfig.app.json",
-            "assets": ["apps/ui/src/favicon.ico", "apps/ui/src/assets"],
+            "outputPath": "dist/apps/client",
+            "index": "apps/client/src/index.html",
+            "main": "apps/client/src/main.tsx",
+            "polyfills": "apps/client/src/polyfills.ts",
+            "tsConfig": "apps/client/tsconfig.app.json",
+            "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
             "styles": [],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -24,8 +24,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/ui/src/environments/environment.ts",
-                  "with": "apps/ui/src/environments/environment.prod.ts"
+                  "replace": "apps/client/src/environments/environment.ts",
+                  "with": "apps/client/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -48,12 +48,11 @@
         "serve": {
           "builder": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "ui:build",
-            "proxyConfig": "apps/ui/proxy.conf.json"
+            "buildTarget": "client:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "ui:build:production"
+              "buildTarget": "client:build:production"
             }
           }
         },
@@ -62,37 +61,37 @@
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "apps/ui/tsconfig.app.json",
-              "apps/ui/tsconfig.spec.json"
+              "apps/client/tsconfig.app.json",
+              "apps/client/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/ui/**/*"]
+            "exclude": ["**/node_modules/**", "!apps/client/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/ui/jest.config.js",
-            "tsConfig": "apps/ui/tsconfig.spec.json",
+            "jestConfig": "apps/client/jest.config.js",
+            "tsConfig": "apps/client/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
       }
     },
-    "ui-e2e": {
-      "root": "apps/ui-e2e",
-      "sourceRoot": "apps/ui-e2e/src",
+    "client-e2e": {
+      "root": "apps/client-e2e",
+      "sourceRoot": "apps/client-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/ui-e2e/cypress.json",
-            "tsConfig": "apps/ui-e2e/tsconfig.e2e.json",
-            "devServerTarget": "ui:serve"
+            "cypressConfig": "apps/client-e2e/cypress.json",
+            "tsConfig": "apps/client-e2e/tsconfig.e2e.json",
+            "devServerTarget": "client:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ui:serve:production"
+              "devServerTarget": "client:serve:production"
             }
           }
         },
@@ -100,8 +99,8 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "tsConfig": ["apps/ui-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/ui-e2e/**/*"]
+            "tsConfig": ["apps/client-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/client-e2e/**/*"]
           }
         }
       }
@@ -182,5 +181,5 @@
       }
     }
   },
-  "defaultProject": "ui"
+  "defaultProject": "client"
 }
